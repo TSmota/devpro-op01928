@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from "eslint/config";
+
+export default defineConfig({
   env: {
     node: true,
   },
@@ -16,4 +18,4 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
   },
-};
+});
