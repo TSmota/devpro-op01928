@@ -1,11 +1,15 @@
 import { Search } from "../search/search";
 
+import { useForecastContext } from "../../context/forecast-context";
 import "./sidebar.css";
 
 export function Sidebar() {
+  const { loading, searchCity } = useForecastContext();
+
   return (
     <aside className="sidebar">
-      <Search />
+      <Search disabled={loading} onSearch={searchCity} />
+
       <p className="sidebar__disclaimer">
         The information provided by this weather application is for general informational purposes only. All weather data,
         forecasts, and alerts are obtained from third-party sources and are provided “as is” without warranty of any kind,

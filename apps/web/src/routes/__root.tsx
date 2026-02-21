@@ -1,5 +1,6 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { Sidebar } from "../components/sidebar/sidebar";
+import { ForecastProvider } from "../context/forecast-context";
 
 export const Route = createRootRoute({
   component: Layout
@@ -8,10 +9,12 @@ export const Route = createRootRoute({
 function Layout() {
   return (
     <div className="app-layout">
-      <Sidebar />
-      <main>
-        <Outlet />
-      </main>
+      <ForecastProvider>
+        <Sidebar />
+        <main>
+          <Outlet />
+        </main>
+      </ForecastProvider>
     </div>
   )
 }

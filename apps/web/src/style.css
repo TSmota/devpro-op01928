@@ -31,6 +31,12 @@ p {
   padding: 0;
 }
 
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -41,6 +47,26 @@ body {
   display: grid;
   grid-template-columns: 1fr 3fr;
   height: 100%;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.gradient-background {
+  background: linear-gradient(180deg, #0168c3, #51d8fe);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.text-white {
+  color: white;
 }
 
 /* @media (prefers-color-scheme: dark) {

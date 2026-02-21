@@ -1,38 +1,50 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import './style.css';
+import { useForecastContext } from '../../context/forecast-context';
+import { Loader } from '../../components/loader/loader';
+import { useEffect } from 'react';
 import { WeatherCard } from '../../components/weather-card/weather-card';
 
-export const Route = createFileRoute('/weather/$city')({
+export const Route = createFileRoute('/forecast/$city')({
   component: RouteComponent,
 })
 
-const mockData = [
-  { label: 'Today', lowestTemperature: 70, highestTemperature: 80, weather: 'Sunny' },
-  { label: 'Tuesday', lowestTemperature: 68, highestTemperature: 78, weather: 'Partly Cloudy' },
-  { label: 'Wednesday', lowestTemperature: 65, highestTemperature: 75, weather: 'Rainy' },
-  { label: 'Thursday', lowestTemperature: 60, highestTemperature: 70, weather: 'Cloudy' },
-  { label: 'Friday', lowestTemperature: 62, highestTemperature: 72, weather: 'Sunny' },
-]
-
 function RouteComponent() {
-  const { city } = Route.useParams()
+  const params = Route.useParams();
+  const { loading, forecast, searchCity } = useForecastContext();
+
+  useEffect(() => {
+    if (forecast || loading) {
+      return;
+    }
+
+    searchCity(params.city);
+  }, [forecast, loading, params.city])
+
+  if (!forecast || loading) {
+    return (
+      <section className="weather gradient-background text-white">
+        <Loader />
+      </section>
+    )
+  }
 
   return (
-    <section className="weather">
+    <section className="weather gradient-background text-white">
       <h2 className="weather__title">Weather</h2>
-      <div className="weather__image">
+      <div className="weather__image text-center">
         <i className="wi wi-day-sunny" />
       </div>
-      <h3 className="weather__city">{city}</h3>
-      <p className="weather__temperature">80°F</p>
+      <h3 className="weather__city">{forecast.city}</h3>
+      <p className="weather__temperature">{forecast.currentTemperature}°F</p>
 
       <section className="weather__details">
         <h4 className="weather__details-title">5-Day Forecast</h4>
 
         <div className="weather__details-list">
-          {mockData.map((data) => (
-            <WeatherCard key={data.label} {...data} />
+          {forecast.forecasts.map((data) => (
+            <WeatherCard key={data.date} forecast={data} />
           ))}
         </div>
 

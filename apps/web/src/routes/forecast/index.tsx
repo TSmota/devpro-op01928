@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/weather/')({
+export const Route = createFileRoute('/forecast/')({
   beforeLoad: () => {
     throw redirect({
       to: '/',

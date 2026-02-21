@@ -1,14 +1,8 @@
 .weather {
   padding: 1rem;
-  background: linear-gradient(180deg, #0168c3, #51d8fe);
   display: flex;
   flex-direction: column;
   height: 100%;
-  color: white;
-}
-
-.weather__image {
-  text-align: center;
 }
 
 .weather__image i {

@@ -1,10 +1,8 @@
+import { ForecastItem } from '@repo/models';
 import './weather-card.css';
 
 interface WeatherCardProps {
-  label: string;
-  lowestTemperature: number;
-  highestTemperature: number;
-  weather: string;
+  forecast: ForecastItem;
 }
 
 const weatherIcons: Record<string, string> = {
@@ -15,20 +13,20 @@ const weatherIcons: Record<string, string> = {
 };
 
 export function WeatherCard(props: WeatherCardProps) {
-  const { label, lowestTemperature, highestTemperature, weather } = props;
+  const { forecast } = props;
 
   return (
     <div className="c-weather-card">
-      <p className="c-weather-card__label">{label}</p>
-      <i className={`c-weather-card__icon wi ${weatherIcons[weather]}`} />
+      <p className="c-weather-card__label">{forecast.date}</p>
+      <i className={`c-weather-card__icon wi ${weatherIcons[forecast.weather]}`} />
       <div className="c-weather-card__temperature">
         <span className="c-weather-card__temperature-value">
           <p>L</p>
-          <p>{lowestTemperature}°</p>
+          <p>{forecast.tempMin}°</p>
         </span>
         <span className="c-weather-card__temperature-value">
           <p>H</p>
-          <p>{highestTemperature}°</p>
+          <p>{forecast.tempMax}°</p>
         </span>
       </div>
     </div>

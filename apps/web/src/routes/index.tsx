@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({
 
 function Index() {
   return (
-    <section>
+    <section className="p-1 gradient-background text-center h-full text-white">
       <h1>Weather forecast</h1>
 
       <p>Search for your city to get the latest weather information.</p>
