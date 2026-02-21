@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsup src",
+    "dev": "tsup src/server.ts --watch --onSuccess \"node dist/server.js\"",
+    "lint": "eslint \"src/**/*.ts\"",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "11.2.0",
+    "@repo/models": "workspace:*",
+    "@repo/services": "workspace:*",
+    "fastify": "5.7.4"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "25.3.0",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3"
+  }
+}
