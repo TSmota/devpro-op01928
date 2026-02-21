@@ -1,0 +1,9 @@
+.c-search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.c-search__title {
+  font-weight: 700;
+}

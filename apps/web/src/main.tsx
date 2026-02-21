@@ -1,20 +1,27 @@
-import { createRoot } from "react-dom/client";
-import "./style.css";
-import typescriptLogo from "/typescript.svg";
+import { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-const App = () => (
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" className="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img
-        src={typescriptLogo}
-        className="logo vanilla"
-        alt="TypeScript logo"
-      />
-    </a>
-  </div>
-);
+import { routeTree } from './routeTree.gen'
 
-createRoot(document.getElementById("app")!).render(<App />);
+import './style.css'
+
+const router = createRouter({ routeTree })
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
+const rootElement = document.getElementById('app')!
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+}

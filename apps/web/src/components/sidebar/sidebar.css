@@ -1,0 +1,12 @@
+.sidebar {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+}
+
+.sidebar__disclaimer {
+  font-size: 0.875rem;
+  color: #070707;
+}
