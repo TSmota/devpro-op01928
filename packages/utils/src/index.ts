@@ -1,2 +1,2 @@
-export * from './debounce'
-export * from './string'
+export * from './debounce.js'
+export * from './string.js'

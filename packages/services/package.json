@@ -1,15 +1,15 @@
 {
   "name": "@repo/services",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "exports": {
-    ".": "./dist/index.js",
-    "./http": "./dist/http/http-service.js"
+    ".": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "lint": "eslint src --ext .ts,.tsx"
+    "lint": "eslint src --ext .ts,.tsx --fix"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

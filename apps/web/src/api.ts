@@ -1,3 +1,3 @@
-import { HTTPService } from "@repo/services/http";
+import { HTTPService } from "@repo/services";
 
 export const api = new HTTPService("http://localhost:3000/api");
