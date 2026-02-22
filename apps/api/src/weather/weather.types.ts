@@ -1,4 +1,5 @@
-import type { ForecastItem } from "@repo/models";
+import type { ForecastItem, WeatherForecast } from "@repo/models";
+import type { RequestReply } from "../types.js";
 
 /**
  * Represents the query parameters for searching weather forecasts by city name.
@@ -6,6 +7,14 @@ import type { ForecastItem } from "@repo/models";
 export interface SearchQuery {
   /** City name to search for */
   city: string;
+}
+
+/**
+ * Represents the structure of the API response for a city search request, including the weather forecast data.
+ */
+export interface SearchCityRequest {
+  Querystring: SearchQuery;
+  Reply: RequestReply<WeatherForecast>;
 }
 
 /**

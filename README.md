@@ -31,13 +31,13 @@ Create `.env` files:
 
 ```env
 OPENWEATHERMAP_API_KEY=your_key_here
-PORT=3001
+PORT=3000
 ```
 
 **`apps/web/.env`**
 
 ```env
-VITE_BACKEND_URL=http://localhost:3001
+VITE_BACKEND_URL=http://localhost:3000
 ```
 
 ### 3. Run the App
@@ -49,7 +49,7 @@ pnpm dev
 ```
 
 - **Web app**: http://localhost:5173
-- **API server**: http://localhost:3001
+- **API server**: http://localhost:3000
 
 ## Project Structure
 

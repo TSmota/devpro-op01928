@@ -1,15 +1,8 @@
 import { HTTPService } from "@repo/services";
 import type { FastifyInstance } from "fastify";
-import type { OpenWeatherGeoResponse, SearchQuery, OpenWeatherForecastResponse } from "./weather.types.js";
-import type { WeatherForecast } from "@repo/models";
-import type { RequestReply } from "../types.js";
+import type { OpenWeatherGeoResponse, OpenWeatherForecastResponse, SearchCityRequest } from "./weather.types.js";
 import { OpenWeatherAdapter } from "./weather.adapter.js";
 import { getEnvVariable } from "../envs.js";
-
-type SearchCityRequest = {
-  Querystring: SearchQuery;
-  Reply: RequestReply<WeatherForecast>;
-}
 
 const httpService = new HTTPService('https://api.openweathermap.org')
 const openWeatherAdapter = new OpenWeatherAdapter()

@@ -1,7 +1,8 @@
-import { WeatherForecast } from "@repo/models";
+import type { WeatherForecast } from "@repo/models";
 import { isContentfulString } from "@repo/utils";
 import { useNavigate } from "@tanstack/react-router";
-import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import type { PropsWithChildren } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { api } from "../api";
 
 interface ForecastContextValue {
@@ -47,6 +48,7 @@ export const ForecastProvider = (props: PropsWithChildren) => {
       return
     }
 
+    setErrorMessage(undefined);
     setLoading(true);
 
     const { data, error } = await api.get<WeatherForecast>(`/search?city=${query}`)
