@@ -12,13 +12,15 @@ export class HTTPService {
       body: body ? JSON.stringify(body) : undefined,
     });
 
-    if (!res.ok) {
-      const error = await res.text();
-      return { error };
-    }
-
     const contentType = res.headers.get("content-type");
     const isJson = contentType?.includes("application/json");
+
+    if (!res.ok) {
+      const error = isJson ? await res.json() : await res.text();
+      const message = typeof error === "string" ? error : error?.message || "Unknown error";
+
+      return { error: message };
+    }
 
     if (isJson) {
       const data = await res.json();
