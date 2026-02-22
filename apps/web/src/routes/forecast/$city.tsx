@@ -5,6 +5,7 @@ import { useForecastContext } from '../../context/forecast-context';
 import { Loader } from '../../components/loader/loader';
 import { useEffect } from 'react';
 import { WeatherCard } from '../../components/weather-card/weather-card';
+import { getWeatherIconClass } from '../../utils';
 
 export const Route = createFileRoute('/forecast/$city')({
   component: RouteComponent,
@@ -34,7 +35,7 @@ function RouteComponent() {
     <section className="weather gradient-background text-white">
       <h2 className="weather__title">Weather</h2>
       <div className="weather__image text-center">
-        <i className="wi wi-day-sunny" />
+        <i className={`wi ${getWeatherIconClass(forecast.currentWeather)}`} />
       </div>
       <h3 className="weather__city">{forecast.city}</h3>
       <p className="weather__temperature">{forecast.currentTemperature}°F</p>

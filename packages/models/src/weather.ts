@@ -24,7 +24,7 @@ export interface WeatherForecast {
   /**
    * A description of the current weather condition (e.g., "clear sky", "light rain").
    */
-  currentWeather: string;
+  currentWeather: WeatherDescription;
 
   /**
    * A list of forecast entries, each containing weather data for a specific timestamp.
@@ -32,17 +32,21 @@ export interface WeatherForecast {
   forecasts: ForecastItem[];
 }
 
+export type WeatherDescription = 
+ | 'clear sky'
+ | 'cloudy'
+ | 'shower rain'
+ | 'rain'
+ | 'thunderstorm'
+ | 'snow'
+ | 'mist';
+
 /**
  * Forecast data for a specific timestamp.
  */
 export interface ForecastItem {
   /** Time of data forecasted (ISO string, UTC) */
   date: string;
-
-  /**
-   * Weather condition icon code, which can be used to display an appropriate weather icon.
-   */
-  icon: string;
 
   /**
    * Temperature.
@@ -66,5 +70,5 @@ export interface ForecastItem {
   /**
    * A description of the weather condition.
    */
-  weather: string;
+  weather: WeatherDescription;
 }

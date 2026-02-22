@@ -6,19 +6,19 @@
 }
 
 .weather__image i {
-  font-size: max(128px, 10vw);
+  font-size: max(128px, 8vw);
   line-height: 1.25em;
 }
 
 .weather__city {
-  font-size: max(2rem, 5vw);
+  font-size: max(2rem, 4vw);
   text-align: center;
   font-weight: normal;
   margin: 1rem 0 0;
 }
 
 .weather__temperature {
-  font-size: max(4rem, 7.5vw);
+  font-size: max(4rem, 6vw);
   text-align: center;
   font-weight: 500;
   margin: 0;
@@ -43,4 +43,10 @@
   margin-top: 2rem;
   font-size: 0.875rem;
   color: #070707;
+}
+
+@media (max-width: 768px) {
+  .weather__details-list {
+    justify-content: space-around;
+  }
 }

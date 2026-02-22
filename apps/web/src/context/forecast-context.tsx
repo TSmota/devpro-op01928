@@ -1,7 +1,7 @@
 import { WeatherForecast } from "@repo/models";
 import { isContentfulString } from "@repo/utils";
 import { useNavigate } from "@tanstack/react-router";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { api } from "../api";
 
 interface ForecastContextValue {
@@ -22,7 +22,7 @@ export const useForecastContext = () => {
   return context;
 }
 
-export const ForecastProvider = (props: React.PropsWithChildren) => {
+export const ForecastProvider = (props: PropsWithChildren) => {
   const { children } = props
   
   const [loading, setLoading] = useState(false);
