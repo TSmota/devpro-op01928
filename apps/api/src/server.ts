@@ -19,7 +19,7 @@ const start = async () => {
   server.log.info(`Starting server on port ${port}...`)
 
   try {
-    await server.listen({ port })
+    await server.listen({ host: '0.0.0.0', port })
 
     server.log.info(`Server is listening at port ${port}`)
   } catch (err) {
