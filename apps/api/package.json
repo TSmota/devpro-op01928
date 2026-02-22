@@ -13,6 +13,7 @@
     "@fastify/cors": "11.2.0",
     "@repo/models": "workspace:*",
     "@repo/services": "workspace:*",
+    "@repo/utils": "workspace:*",
     "fastify": "5.7.4"
   },
   "devDependencies": {

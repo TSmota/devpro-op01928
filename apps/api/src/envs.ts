@@ -25,3 +25,24 @@ export function getEnvVariable(name: string, defaultValue?: string): string {
 
   return value
 }
+
+/**
+ * Validate required environment variables at startup
+ * @throws Error if any required variable is missing
+ */
+export function validateEnv(): void {
+  const requiredVars = ['OPENWEATHERMAP_API_KEY']
+  const missingVars: string[] = []
+
+  for (const varName of requiredVars) {
+    if (!process.env[varName]) {
+      missingVars.push(varName)
+    }
+  }
+
+  if (missingVars.length > 0) {
+    throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`)
+  }
+
+  console.log('✓ Environment variables validated')
+}
