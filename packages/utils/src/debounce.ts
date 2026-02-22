@@ -9,10 +9,10 @@
  * 
  * @returns A debounced version of the function
  */
-export function debounce(func: (...args: unknown[]) => void, wait: number) {
+export function debounce<T extends (...args: never[]) => void>(func: T, wait: number) {
   let timeout: number | null = null
 
-  return function (...args: unknown[]) {
+  return function (...args: Parameters<T>) {
     if (timeout) {
       clearTimeout(timeout)
     }

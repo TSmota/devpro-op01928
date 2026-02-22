@@ -5,11 +5,7 @@ export interface RequestReply<T> {
   /** Successful response */
   200: T;
   /** Client error response */
-  '4xx': {
-    message: string;
-  };
+  '4xx': string;
   /** Server error response */
-  '5xx': {
-    message: string;
-  };
+  '5xx': string;
 }

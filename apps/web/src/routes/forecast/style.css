@@ -45,6 +45,13 @@
   color: #070707;
 }
 
+.weather__error {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
 @media (max-width: 768px) {
   .weather__details-list {
     justify-content: space-around;

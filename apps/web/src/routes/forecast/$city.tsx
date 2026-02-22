@@ -13,15 +13,23 @@ export const Route = createFileRoute('/forecast/$city')({
 
 function RouteComponent() {
   const params = Route.useParams();
-  const { loading, forecast, searchCity } = useForecastContext();
+  const { errorMessage, loading, forecast, searchCity } = useForecastContext();
 
   useEffect(() => {
-    if (forecast || loading) {
+    if (forecast || loading || errorMessage) {
       return;
     }
 
     searchCity(params.city);
-  }, [forecast, loading, params.city])
+  }, [forecast, loading, errorMessage, params.city])
+
+  if (errorMessage) {
+    return (
+      <section className="weather gradient-background text-white">
+        <p className="weather__error">{errorMessage}</p>
+      </section>
+    )
+  }
 
   if (!forecast || loading) {
     return (

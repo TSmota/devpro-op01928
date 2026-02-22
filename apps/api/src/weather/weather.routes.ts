@@ -29,20 +29,20 @@ export function registerWeatherRoutes(server: FastifyInstance) {
 
     if ('error' in geoResponse) {
       server.log.error(`Error fetching city data: ${geoResponse.error}`)
-      return reply.code(500).send({ message: 'Failed to fetch city data' })
+      return reply.code(500).send('Failed to fetch city data')
     }
 
     const [firstCity] = geoResponse.data
 
     if (!firstCity) {
-      return reply.code(404).send({ message: 'City not found' })
+      return reply.code(404).send('City not found')
     }
 
     const forecastResponse = await httpService.get<OpenWeatherForecastResponse>(`/data/2.5/forecast?units=imperial&lat=${firstCity.lat}&lon=${firstCity.lon}&appid=${API_KEY}`)
 
     if ('error' in forecastResponse) {
       server.log.error(`Error fetching forecast data: ${forecastResponse.error}`)
-      return reply.code(500).send({ message: 'Failed to fetch forecast data' })
+      return reply.code(500).send('Failed to fetch forecast data')
     }
 
     const forecasts = openWeatherAdapter.toDomain(forecastResponse.data)

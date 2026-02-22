@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { debounce } from "@repo/utils";
 
 import { Input } from "../input/input";
 
-import './search.css'
+import './search.css';
 
 interface ISearchProps {
   disabled?: boolean;
@@ -13,7 +13,7 @@ interface ISearchProps {
 export function Search(props: ISearchProps) {
   const { disabled, onSearch } = props
 
-  const onChange = useCallback(debounce((event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback(debounce((event: ChangeEvent<HTMLInputElement>) => {
     if (onSearch) {
       onSearch(event.target.value)
     }

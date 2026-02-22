@@ -10,10 +10,11 @@
     "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "dependencies": {
-    "@tanstack/react-router": "1.161.4",
     "@repo/models": "workspace:*",
-    "@repo/utils": "workspace:*",
     "@repo/services": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "@tanstack/react-router": "1.161.4",
+    "dotenv": "17.3.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

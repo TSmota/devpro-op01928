@@ -5,6 +5,7 @@ import { createContext, PropsWithChildren, useCallback, useContext, useEffect, u
 import { api } from "../api";
 
 interface ForecastContextValue {
+  errorMessage?: string;
   loading?: boolean;
   forecast?: WeatherForecast;
   searchCity: (query: string) => Promise<void>;
@@ -26,7 +27,7 @@ export const ForecastProvider = (props: PropsWithChildren) => {
   const { children } = props
   
   const [loading, setLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
   const [forecast, setForecast] = useState<WeatherForecast>();
 
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export const ForecastProvider = (props: PropsWithChildren) => {
   }, [forecast, navigate]);
 
   const searchCity = useCallback(async (query: string) => {
-    if (!isContentfulString(query) || loading || hasError) {
+    if (!isContentfulString(query) || loading) {
       return
     }
 
@@ -53,15 +54,16 @@ export const ForecastProvider = (props: PropsWithChildren) => {
     if (error) {
       console.error(`Error fetching search results: ${error}`)
       setLoading(false);
-      setHasError(true);
+      setErrorMessage(error);
       return
     }
 
     setForecast(data);
     setLoading(false);
-  }, [loading, hasError]);
+  }, [loading, errorMessage]);
 
   const contextValue: ForecastContextValue = useMemo(() => ({
+    errorMessage,
     forecast: forecast,
     loading,
     searchCity,
