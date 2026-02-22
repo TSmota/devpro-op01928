@@ -9,16 +9,30 @@
  * 
  * @returns A debounced version of the function
  */
-export function debounce<T extends (...args: never[]) => void>(func: T, wait: number) {
-  let timeout: number | null = null
+type Debounced<Args extends unknown[]> = ((...args: Args) => void) & {
+  cancel: () => void
+}
 
-  return function (...args: Parameters<T>) {
-    if (timeout) {
+export function debounce<Args extends unknown[]>(func: (...args: Args) => void, wait: number): Debounced<Args> {
+  let timeout: ReturnType<typeof setTimeout> | null = null
+
+  function debounced(...args: Args) {
+    if (timeout !== null) {
       clearTimeout(timeout)
     }
 
     timeout = setTimeout(() => {
       func(...args)
+      timeout = null
     }, wait)
   }
+
+  debounced.cancel = () => {
+    if (timeout !== null) {
+      clearTimeout(timeout)
+      timeout = null
+    }
+  }
+
+  return debounced as Debounced<Args>
 }

@@ -1,4 +1,5 @@
-import { ChangeEvent, useCallback } from "react";
+import type { ChangeEvent } from "react";
+import { useEffect, useMemo } from "react";
 import { debounce } from "@repo/utils";
 
 import { Input } from "../input/input";
@@ -13,11 +14,23 @@ interface ISearchProps {
 export function Search(props: ISearchProps) {
   const { disabled, onSearch } = props
 
-  const onChange = useCallback(debounce((event: ChangeEvent<HTMLInputElement>) => {
-    if (onSearch) {
-      onSearch(event.target.value)
+  const debounced = useMemo(() => {
+    return debounce((value: string) => {
+      if (onSearch) {
+        onSearch(value)
+      }
+    }, 500)
+  }, [onSearch])
+
+  useEffect(() => {
+    return () => {
+      debounced.cancel()
     }
-  }, 500), [onSearch])
+  }, [debounced])
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    debounced(event.target.value)
+  }
 
   return (
     <section className="c-search">
