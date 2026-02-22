@@ -2,7 +2,7 @@ import type { WeatherForecast } from "@repo/models";
 import { isContentfulString } from "@repo/utils";
 import { useNavigate } from "@tanstack/react-router";
 import type { PropsWithChildren } from "react";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { api } from "../api";
 
 interface ForecastContextValue {
@@ -33,16 +33,6 @@ export const ForecastProvider = (props: PropsWithChildren) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!forecast) {
-      return
-    }
-
-    const city = forecast.city.toLowerCase();
-    
-    navigate({ to: '/forecast/$city', params: { city } });
-  }, [forecast, navigate]);
-
   const searchCity = useCallback(async (query: string) => {
     if (!isContentfulString(query) || loading) {
       return
@@ -51,22 +41,25 @@ export const ForecastProvider = (props: PropsWithChildren) => {
     setErrorMessage(undefined);
     setLoading(true);
 
-    const { data, error } = await api.get<WeatherForecast>(`/search?city=${query}`)
+    const response = await api.get<WeatherForecast>(`/search?city=${query}`)
 
-    if (error) {
-      console.error(`Error fetching search results: ${error}`)
+    if ('error' in response) {
+      console.error(`Error fetching search results: ${response.error}`)
       setLoading(false);
-      setErrorMessage(error);
+      setErrorMessage(response.error);
       return
     }
 
-    setForecast(data);
+    setForecast(response.data);
     setLoading(false);
+    
+    const city = response.data.city.toLowerCase();
+    navigate({ to: '/forecast/$city', params: { city } });
   }, [loading, errorMessage]);
 
   const contextValue: ForecastContextValue = useMemo(() => ({
     errorMessage,
-    forecast: forecast,
+    forecast,
     loading,
     searchCity,
   }), [forecast, loading, searchCity]);
