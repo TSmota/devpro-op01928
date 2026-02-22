@@ -16,6 +16,7 @@ registerWeatherRoutes(server)
 
 const start = async () => {
   const port = Number(getEnvVariable('PORT', '3000'))
+  server.log.info(`Starting server on port ${port}...`)
 
   try {
     await server.listen({ port })
